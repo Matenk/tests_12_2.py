@@ -2,9 +2,11 @@ import unittest
 import uni
 
 class TournamentTest(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
+
 
     def setUp(self):
         self.usein = uni.Runner('Усэйн', 10)
@@ -13,22 +15,23 @@ class TournamentTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        for results in dict(cls.all_results).items():
+
+        for results in cls.all_results.items():
             print(results)
 
     def test_1(self):
         self.tournament = uni.Tournament(90, self.usein, self.nick)
-        self.all_results = self.tournament.start()
+        self.all_results.update(self.tournament.start())
         last_place = max(self.all_results.keys())
         self.assertTrue(self.all_results[last_place].name == 'Ник')
     def test_2(self):
         self.tournament = uni.Tournament(90, self.andrey, self.nick)
-        self.all_results = self.tournament.start()
+        self.all_results.update(self.tournament.start())
         last_place = max(self.all_results.keys())
         self.assertTrue(self.all_results[last_place].name == 'Ник')
     def test_3(self):
         self.tournament = uni.Tournament(90, self. usein, self.andrey, self.nick)
-        self.all_results = self.tournament.start()
+        self.all_results.update(self.tournament.start())
         last_place = max(self.all_results.keys())
         self.assertTrue(self.all_results[last_place].name == 'Ник')
 
