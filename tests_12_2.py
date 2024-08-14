@@ -16,26 +16,34 @@ class TournamentTest(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
 
-        for results in cls.all_results.items():
-            print(results)
+        result_name = {place: runner.name for place, runner in cls.all_results.items()}
+        print(f'{result_name}')
+        # for results in cls.all_results.items():
+        #     print(results)
 
     def test_1(self):
         self.tournament = uni.Tournament(90, self.usein, self.nick)
-        self.all_results.update(self.tournament.start())
-        last_place = max(self.all_results.keys())
-        self.assertTrue(self.all_results[last_place].name == 'Ник')
+        self.results = self.tournament.start()
+        self.all_results.update(self.results)
+        last_place = max(self.results.keys())
+        self.assertTrue(self.results[last_place].name == 'Ник')
+        self.tearDownClass()
+
     def test_2(self):
         self.tournament = uni.Tournament(90, self.andrey, self.nick)
-        self.all_results.update(self.tournament.start())
-        last_place = max(self.all_results.keys())
-        self.assertTrue(self.all_results[last_place].name == 'Ник')
+        self.results = self.tournament.start()
+        self.all_results.update(self.results)
+        last_place = max(self.results.keys())
+        self.assertTrue(self.results[last_place].name == 'Ник')
+        self.tearDownClass()
+
     def test_3(self):
         self.tournament = uni.Tournament(90, self. usein, self.andrey, self.nick)
-        self.all_results.update(self.tournament.start())
-        last_place = max(self.all_results.keys())
-        self.assertTrue(self.all_results[last_place].name == 'Ник')
+        self.results = self.tournament.start()
+        self.all_results.update(self.results)
+        last_place = max(self.results.keys())
+        self.assertTrue(self.results[last_place].name == 'Ник')
+
 
 if __name__ == '__main__':
     unittest.main()
-
-
